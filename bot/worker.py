@@ -22,7 +22,7 @@ async def stats(e):
     try:
         wah = e.pattern_match.group(1).decode("UTF-8")
         wh = decode(wah)
-        out, dl = wh.split(";")
+        out, dl, id = wh.split(";")
         ot = hbs(int(Path(out).stat().st_size))
         ov = hbs(int(Path(dl).stat().st_size))
         ans = f"Downloaded:\n{ov}\n\nCompressing:\n{ot}"
@@ -114,7 +114,7 @@ async def encod(event):
         thum = "thumb.jpg"
         dtime = ts(int((es - s).seconds) * 1000)
         e = xxx
-        hehe = f"{out};{dl}"
+        hehe = f"{out};{dl};0"
         wah = code(hehe)
         nn = await e.edit(
             "`Compressing..`",
