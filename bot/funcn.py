@@ -15,6 +15,7 @@
 
 from . import *
 from .config import *
+import psutil, os, signal
 
 WORKING = []
 QUEUE = {}
@@ -140,10 +141,17 @@ async def skip(e):
     out, dl, id = wh.split(";")
     try:
         if QUEUE.get(int(id)):
+            WORKING.clear()
             QUEUE.pop(int(id))
         await e.delete()
         os.remove(dl)
         os.remove(out)
+        for proc in psutil.process_iter(): #Lets kill ffmpeg else it will run in memory even after deleting input.
+            processName = proc.name()
+            processID = proc.pid
+            print(processName , ' - ', processID)
+            if(processName == "ffmpeg"):
+             os.kill(processID,signal.SIGKILL)
     except BaseException:
         pass
     return
