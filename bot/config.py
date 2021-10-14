@@ -29,7 +29,7 @@ try:
         "THUMBNAIL", default="https://telegra.ph/file/75ee20ec8d8c8bba84f02.jpg"
     )
 except Exception as e:
-    LOGS.info("Environment vars Missing")
-    LOGS.info("something went wrong")
-    LOGS.info(str(e))
-    exit(1)
+    print("Environment vars Missing")
+    print("something went wrong")
+    print(str(e))
+    exit()
