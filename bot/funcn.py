@@ -13,9 +13,13 @@
 # License can be found in <
 # https://github.com/1Danish-00/CompressorQueue/blob/main/License> .
 
+import os
+import signal
+
+import psutil
+
 from . import *
 from .config import *
-import psutil, os, signal
 
 WORKING = []
 QUEUE = {}
@@ -146,12 +150,14 @@ async def skip(e):
         await e.delete()
         os.remove(dl)
         os.remove(out)
-        for proc in psutil.process_iter(): #Lets kill ffmpeg else it will run in memory even after deleting input.
+        # Lets kill ffmpeg else it will run in memory even after deleting
+        # input.
+        for proc in psutil.process_iter():
             processName = proc.name()
             processID = proc.pid
-            print(processName , ' - ', processID)
-            if(processName == "ffmpeg"):
-             os.kill(processID,signal.SIGKILL)
+            print(processName, " - ", processID)
+            if processName == "ffmpeg":
+                os.kill(processID, signal.SIGKILL)
     except BaseException:
         pass
     return

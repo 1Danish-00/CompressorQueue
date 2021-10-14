@@ -47,6 +47,11 @@ async def _(e):
     await help(e)
 
 
+@bot.on(events.NewMessage(pattern="/link"))
+async def _(e):
+    await dl_link(e)
+
+
 ######## Callbacks #########
 
 
