@@ -102,7 +102,7 @@ async def dl_link(event):
             ),
         )
     ds = await xxx.client.send_file(
-        xxx.chat_id, file=ok, force_document=True, thumb=thum
+        xxx.chat_id, file=ok, force_document=True, thumb=thum, caption=out
     )
     await nnn.delete()
     org = int(Path(dl).stat().st_size)
@@ -242,7 +242,7 @@ async def encod(event):
                 ),
             )
         ds = await e.client.send_file(
-            e.chat_id, file=ok, force_document=True, thumb=thum
+            e.chat_id, file=ok, force_document=True, thumb=thum, caption=out
         )
         await nnn.delete()
         org = int(Path(dl).stat().st_size)
