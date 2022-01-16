@@ -101,8 +101,9 @@ async def dl_link(event):
                 progress(d, t, nnn, ttt, "uploading..")
             ),
         )
+    fname = out.split("/")[1]
     ds = await xxx.client.send_file(
-        xxx.chat_id, file=ok, force_document=True, thumb=thum, caption=out
+        xxx.chat_id, file=ok, force_document=True, thumb=thum, caption=f"`{fname}`"
     )
     await nnn.delete()
     org = int(Path(dl).stat().st_size)
@@ -241,8 +242,9 @@ async def encod(event):
                     progress(d, t, nnn, ttt, "uploading..")
                 ),
             )
+        fname = out.split("/")[1]
         ds = await e.client.send_file(
-            e.chat_id, file=ok, force_document=True, thumb=thum, caption=out
+            e.chat_id, file=ok, force_document=True, thumb=thum, caption=f"`{fname}`
         )
         await nnn.delete()
         org = int(Path(dl).stat().st_size)
