@@ -101,7 +101,7 @@ async def something():
         try:
             if not WORKING and QUEUE:
                 user = int(OWNER.split()[0])
-                e = await bot.send_message(user, "Downloding Queue Files")
+                e = await bot.send_message(user, "`Downloding Queue Files...`")
                 s = dt.now()
                 try:
                     if isinstance(QUEUE[list(QUEUE.keys())[0]], str):
@@ -176,8 +176,9 @@ async def something():
                             progress(d, t, nnn, ttt, "uploading..")
                         ),
                     )
+                fname = out.split("/")[1]
                 ds = await e.client.send_file(
-                    e.chat_id, file=ok, force_document=True, thumb=thum
+                    e.chat_id, file=ok, force_document=True, thumb=thum, caption=f"{fname}"
                 )
                 await nnn.delete()
                 org = int(Path(dl).stat().st_size)
