@@ -47,7 +47,7 @@ async def dl_link(event):
         return
     if WORKING or QUEUE:
         QUEUE.update({link: name})
-        return await event.reply(f"Added {link} in QUEUE")
+        return await event.reply(f"`Added {link} in QUEUE #{len(QUEUE)}`")
     WORKING.append(1)
     s = dt.now()
     xxx = await event.reply("`Downloading...`")
@@ -101,8 +101,9 @@ async def dl_link(event):
                 progress(d, t, nnn, ttt, "uploading..")
             ),
         )
+    fname = out.split("/")[1]
     ds = await xxx.client.send_file(
-        xxx.chat_id, file=ok, force_document=True, thumb=thum
+        xxx.chat_id, file=ok, force_document=True, thumb=thum, caption=f"`{fname}`"
     )
     await nnn.delete()
     org = int(Path(dl).stat().st_size)
@@ -156,7 +157,7 @@ async def encod(event):
             if not name:
                 name = "video_" + dt.now().isoformat("_", "seconds") + ".mp4"
             QUEUE.update({doc.id: [name, doc]})
-            return await xxx.edit("`Added This File in Queue`")
+            return await xxx.edit(f"`Added This File in Queue #{len(QUEUE)}`")
         WORKING.append(1)
         xxx = await event.reply("`Downloading...`")
         s = dt.now()
@@ -241,8 +242,9 @@ async def encod(event):
                     progress(d, t, nnn, ttt, "uploading..")
                 ),
             )
+        fname = out.split("/")[1]
         ds = await e.client.send_file(
-            e.chat_id, file=ok, force_document=True, thumb=thum
+            e.chat_id, file=ok, force_document=True, thumb=thum, caption=f"`{fname}`"
         )
         await nnn.delete()
         org = int(Path(dl).stat().st_size)
