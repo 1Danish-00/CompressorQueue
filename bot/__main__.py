@@ -101,7 +101,7 @@ async def _(e):
     TOTAL = hbs(total)
     USED = hbs(used)
     FREE = hbs(free)
-    await e.reply("**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPlOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
+    await e.reply("**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPLOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
         TOTAL,
         USED,
         FREE,
