@@ -157,7 +157,7 @@ async def encod(event):
             if not name:
                 name = "video_" + dt.now().isoformat("_", "seconds") + ".mp4"
             QUEUE.update({doc.id: [name, doc]})
-            return await xxx.edit("`Added This File in Queue #{len(QUEUE)}`")
+            return await xxx.edit(f"`Added This File in Queue #{len(QUEUE)}`")
         WORKING.append(1)
         xxx = await event.reply("`Downloading...`")
         s = dt.now()
