@@ -87,6 +87,32 @@ async def _(e):
 async def _(e):
     await bash(e)
 
+@bot.on(events.NewMessage(pattern="/usage"))
+async def _(e):
+    if str(e.sender_id) not in OWNER:
+        if e.sender_id != DEV:
+            return
+    total, used, free = shutil.disk_usage(".")
+    cpuUsage = psutil.cpu_percent()
+    memory = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
+    upload = hbs(psutil.net_io_counters().bytes_sent)
+    down = hbs(psutil.net_io_counters().bytes_recv)
+    TOTAL = hbs(total)
+    USED = hbs(used)
+    FREE = hbs(free)
+    await e.reply("**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPLOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
+        TOTAL,
+        USED,
+        FREE,
+        upload,
+        down,
+        cpuUsage,
+        memory,
+        disk,
+    ))
+
+
 
 ########## AUTO ###########
 
@@ -101,7 +127,7 @@ async def something():
         try:
             if not WORKING and QUEUE:
                 user = int(OWNER.split()[0])
-                e = await bot.send_message(user, "Downloding Queue Files")
+                e = await bot.send_message(user, "`Downloding Queue Files...`")
                 s = dt.now()
                 try:
                     if isinstance(QUEUE[list(QUEUE.keys())[0]], str):
@@ -176,8 +202,9 @@ async def something():
                             progress(d, t, nnn, ttt, "uploading..")
                         ),
                     )
+                fname = out.split("/")[1]
                 ds = await e.client.send_file(
-                    e.chat_id, file=ok, force_document=True, thumb=thum
+                    e.chat_id, file=ok, force_document=True, thumb=thum, caption=f"`{fname}`"
                 )
                 await nnn.delete()
                 org = int(Path(dl).stat().st_size)
@@ -207,5 +234,6 @@ async def something():
 
 LOGS.info("Bot has started.")
 with bot:
+    bot.loop.run_until_complete(startup())
     bot.loop.run_until_complete(something())
     bot.loop.run_forever()
