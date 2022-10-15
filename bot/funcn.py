@@ -66,7 +66,7 @@ def ts(milliseconds: int) -> str:
 def hbs(size):
     if not size:
         return ""
-    power = 2 ** 10
+    power = 2**10
     raised_to_pow = 0
     dict_power_n = {0: "B", 1: "K", 2: "M", 3: "G", 4: "T", 5: "P"}
     while size > power:

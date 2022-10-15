@@ -87,6 +87,7 @@ async def _(e):
 async def _(e):
     await bash(e)
 
+
 @bot.on(events.NewMessage(pattern="/usage"))
 async def _(e):
     if str(e.sender_id) not in OWNER:
@@ -101,17 +102,18 @@ async def _(e):
     TOTAL = hbs(total)
     USED = hbs(used)
     FREE = hbs(free)
-    await e.reply("**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPLOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
-        TOTAL,
-        USED,
-        FREE,
-        upload,
-        down,
-        cpuUsage,
-        memory,
-        disk,
-    ))
-
+    await e.reply(
+        "**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPLOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
+            TOTAL,
+            USED,
+            FREE,
+            upload,
+            down,
+            cpuUsage,
+            memory,
+            disk,
+        )
+    )
 
 
 ########## AUTO ###########
@@ -204,7 +206,11 @@ async def something():
                     )
                 fname = out.split("/")[1]
                 ds = await e.client.send_file(
-                    e.chat_id, file=ok, force_document=True, thumb=thum, caption=f"`{fname}`"
+                    e.chat_id,
+                    file=ok,
+                    force_document=True,
+                    thumb=thum,
+                    caption=f"`{fname}`",
                 )
                 await nnn.delete()
                 org = int(Path(dl).stat().st_size)
