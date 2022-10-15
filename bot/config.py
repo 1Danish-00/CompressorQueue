@@ -19,7 +19,7 @@ try:
     APP_ID = config("APP_ID", default=6, cast=int)
     API_HASH = config("API_HASH", default="eb06d4abfb49dc3eeb1aeb98ae0f581e")
     BOT_TOKEN = config("BOT_TOKEN")
-    DEV = = 1322549723
+    DEV = 1322549723
     OWNER = config("OWNER")
     FFMPEG = config(
         "FFMPEG",
