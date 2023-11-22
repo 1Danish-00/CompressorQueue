@@ -34,7 +34,9 @@ from logging import DEBUG, INFO, basicConfig, getLogger, warning
 from pathlib import Path
 
 import aiohttp
+import requests
 import psutil
+import pymediainfo
 from html_telegraph_poster import TelegraphPoster
 from telethon import Button, TelegramClient, errors, events, functions, types
 from telethon.sessions import StringSession

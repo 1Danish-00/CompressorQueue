@@ -1,6 +1,7 @@
 aiohttp
 python-decouple
 psutil
+pymediainfo
 tgcrypto
 https://github.com/New-dev0/Telethon/archive/diamond.zip
-git+https://github.com/kaif-00z/html-telegraph-poster
+html_telegraph_poster
