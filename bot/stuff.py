@@ -20,12 +20,38 @@ async def up(event):
     if not event.is_private:
         return
     stt = dt.now()
+    msg = await event.reply("ping…")
     ed = dt.now()
-    v = ts(int((ed - uptime).seconds) * 1000)
     ms = (ed - stt).microseconds / 1000
-    p = f"🌋Pɪɴɢ = {ms}ms"
-    await event.reply(v + "\n" + p)
+    p = f"🌋Pɪɴɢ = `{ms}ms"
+    await msg.edit(p)
 
+
+async def usage(event):
+    if str(event.sender_id) not in OWNER:
+        if event.sender_id != DEV:
+            return
+    total, used, free = shutil.disk_usage(".")
+    cpuUsage = psutil.cpu_percent()
+    memory = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
+    upload = hbs(psutil.net_io_counters().bytes_sent)
+    down = hbs(psutil.net_io_counters().bytes_recv)
+    TOTAL = hbs(total)
+    USED = hbs(used)
+    FREE = hbs(free)
+    await event.reply(
+        "**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPLOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
+            TOTAL,
+            USED,
+            FREE,
+            upload,
+            down,
+            cpuUsage,
+            memory,
+            disk,
+        )
+    )
 
 async def start(event):
     await event.reply(

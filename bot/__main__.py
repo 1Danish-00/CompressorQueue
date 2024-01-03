@@ -90,30 +90,7 @@ async def _(e):
 
 @bot.on(events.NewMessage(pattern="/usage"))
 async def _(e):
-    if str(e.sender_id) not in OWNER:
-        if e.sender_id != DEV:
-            return
-    total, used, free = shutil.disk_usage(".")
-    cpuUsage = psutil.cpu_percent()
-    memory = psutil.virtual_memory().percent
-    disk = psutil.disk_usage("/").percent
-    upload = hbs(psutil.net_io_counters().bytes_sent)
-    down = hbs(psutil.net_io_counters().bytes_recv)
-    TOTAL = hbs(total)
-    USED = hbs(used)
-    FREE = hbs(free)
-    await e.reply(
-        "**TOTAL DISK SPACE**: `{}`\n**USED**: `{}`\n**FREE**: {}\n**UPLOAD**: `{}`\n**DOWNLOAD**: `{}`\n**CPU**: `{}%`\n**RAM**: `{}%`\n**DISK**: `{}%`".format(
-            TOTAL,
-            USED,
-            FREE,
-            upload,
-            down,
-            cpuUsage,
-            memory,
-            disk,
-        )
-    )
+    await usage(e)
 
 
 ########## AUTO ###########
