@@ -51,6 +51,7 @@ def create_api_token():
                 break
             time.sleep(1)
 
+
 create_api_token()
 
 
@@ -139,7 +140,7 @@ async def progress(current, total, event, start, type_of_ps, file=None):
 
 
 async def info(file, event=None):
-    #depreciating second arg.
+    # depreciating second arg.
     try:
         author = (await bot.get_me()).first_name
         author_url = f"https://t.me/{((await bot.get_me()).username)}"
